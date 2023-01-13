@@ -1,6 +1,7 @@
 import { LogoutOutlined, MenuOutlined } from "@mui/icons-material";
 import { AppBar, Grid, IconButton, Toolbar, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import { clearNotesLogout } from "../../store";
 import { startLogout } from "../../store/auth/thunks";
 
 export const Navbar = ({ drawerWith = 240 }) => {
@@ -8,6 +9,7 @@ export const Navbar = ({ drawerWith = 240 }) => {
 
   const onLogout = () => {
     console.log("onLogout");
+    dispatch(clearNotesLogout());
     dispatch(startLogout());
   };
 

@@ -17,16 +17,18 @@ import {
   startGoogleSignIn,
 } from "../../store/";
 
+const userData = {
+  email: "",
+  password: "",
+};
+
 export const LoginPage = () => {
   const dispatch = useDispatch();
 
   const { status, errorMessage } = useSelector((state) => state.auth);
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
-  const { email, password, onInputChange } = useForm({
-    email: "",
-    password: "",
-  });
+  const { email, password, onInputChange } = useForm(userData);
 
   const onSubmit = (event) => {
     event.preventDefault();
