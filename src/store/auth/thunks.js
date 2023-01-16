@@ -6,11 +6,9 @@ import {
 } from "../../firebase/providers";
 import { checkingCredentials, login, logout } from "./authSlice";
 
-export const checkingAuthentication = (email, password) => {
+export const checkingAuthentication = () => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
-
-    //call api
   };
 };
 
@@ -21,23 +19,21 @@ export const startGoogleSignIn = () => {
     //call api
     const result = await signInWithGoogle(); //{ok:true/false ...}
 
+    // console.log("result", result);
+
     if (!result.ok) return dispatch(logout(result.errorMessage));
 
     dispatch(login(result));
   };
 };
 
-export const startRegisterUserWithEmailAndPassword = ({
-  name,
-  email,
-  password,
-}) => {
+export const startRegisterUserWithEmailAndPassword = ({ name, email, password }) => {
   return async (dispatch) => {
     dispatch(checkingCredentials());
 
     const result = await registerWithEmailPassword({ name, email, password });
 
-    console.log(result);
+    // console.log(result);
 
     if (!result.ok) return dispatch(logout(result.errorMessage));
 
@@ -46,11 +42,12 @@ export const startRegisterUserWithEmailAndPassword = ({
 };
 
 export const startSignInWithEmailAndPassword = ({ email, password }) => {
-  console.log({ email, password });
   return async (dispatch) => {
     dispatch(checkingCredentials());
 
     const result = await signInWithEmailPassword({ email, password });
+
+    // console.log(result);
 
     if (!result.ok) return dispatch(logout(result.errorMessage));
 

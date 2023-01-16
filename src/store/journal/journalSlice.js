@@ -42,14 +42,12 @@ export const journalSlice = createSlice({
       state.savedMessage = `La entrada "${payload.title}" se ha guardado correctamente.`;
     },
     setPhotosToActiveNote: (state, { payload }) => {
-      state.activeNote.imageUrls = state.activeNote.imageUrls
-        ? [...state.activeNote.imageUrls, ...payload]
-        : payload;
+      state.activeNote.imageUrls = state.activeNote.imageUrls ? [...state.activeNote.imageUrls, ...payload] : payload;
       state.isSaving = false;
     },
     deleteNote: (state, { payload }) => {
       state.isSaving = false;
-      state.savedMessage = "Nota aliminada correctamente";
+      state.savedMessage = "Nota eliminada correctamente";
       state.activeNote = null;
       state.notes = state.notes.filter((note) => note.id !== payload);
     },

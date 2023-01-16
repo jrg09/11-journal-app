@@ -1,21 +1,11 @@
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import {
-  Alert,
-  Button,
-  Grid,
-  Link,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Alert, Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { Google } from "@mui/icons-material";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks/useForms";
-import {
-  startSignInWithEmailAndPassword,
-  startGoogleSignIn,
-} from "../../store/";
+import { startSignInWithEmailAndPassword, startGoogleSignIn } from "../../store/";
 
 const userData = {
   email: "",
@@ -37,14 +27,13 @@ export const LoginPage = () => {
   };
 
   const onGoogleSignIn = () => {
+    // console.log("onGoogleSignIn");
     dispatch(startGoogleSignIn());
   };
 
   return (
     <AuthLayout title="Inicio de sesión">
-      <form
-        onSubmit={onSubmit}
-        className="animate__animated animate__fadeIn animate__faster">
+      <form onSubmit={onSubmit} className="animate__animated animate__fadeIn animate__faster" aria-label="submit-form">
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -66,6 +55,7 @@ export const LoginPage = () => {
               autoComplete="off"
               fullWidth
               name="password"
+              inputProps={{ "data-testid": "password" }}
               value={password}
               onChange={onInputChange}
             />
@@ -75,11 +65,7 @@ export const LoginPage = () => {
               <Alert severity="error">{errorMessage}</Alert>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button
-                variant="contained"
-                fullWidth
-                type="submit"
-                disabled={isAuthenticating}>
+              <Button variant="contained" fullWidth type="submit" disabled={isAuthenticating}>
                 Login
               </Button>
             </Grid>
@@ -88,7 +74,8 @@ export const LoginPage = () => {
                 variant="contained"
                 fullWidth
                 onClick={onGoogleSignIn}
-                disabled={isAuthenticating}>
+                disabled={isAuthenticating}
+                aria-label="googleSignInButton">
                 <Google />
                 <Typography sx={{ ml: 1 }}>Google</Typography>
               </Button>

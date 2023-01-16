@@ -2,8 +2,8 @@
 import { addNewEmptyNote, setActiveNote, setNotes, setSaving, updatedNote, deleteNote, savingNewNote, setPhotosToActiveNote } from "./journalSlice";
 import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { deleteImage, loadNotes, uploadFile } from "../../firebase/loadNotes";
-import { async } from "@firebase/util";
+import { loadNotes } from "../../firebase/loadNotes";
+import { deleteImage, uploadFile } from "../../firebase/cloudinary";
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -24,6 +24,8 @@ export const startNewNote = () => {
 
     newNote.id = newDoc.id;
 
+    // console.log(`uid creado en firestore: ${newNote.id}`);
+
     dispatch(addNewEmptyNote(newNote));
     dispatch(setActiveNote(newNote));
   };
@@ -34,7 +36,7 @@ export const startLoadingNotes = () => {
     //  dispatch();
 
     const { uid } = getState().auth;
-    console.log("uid", uid);
+    // console.log("uid", uid);
 
     if (!uid) throw new Error("User doesn't exists");
 
@@ -51,9 +53,9 @@ export const startSaveNote = () => {
     const { uid } = getState().auth;
     const { activeNote: note } = getState().journal;
 
-    console.log(`Start saving note ${note.id}`);
+    // console.log(`Start saving note ${note.id}`);
 
-    console.log(note);
+    // console.log(note);
 
     const noteToFirestore = { ...note };
     delete noteToFirestore.id;
@@ -69,7 +71,7 @@ export const startUploadingFiles = (files = []) => {
   return async (dispatch, getState) => {
     dispatch(setSaving());
 
-    console.log(`startUploadingFiles files: ${files.length}`);
+    // console.log(`startUploadingFiles files: ${files.length}`);
 
     const fileUploadPromises = [];
 
@@ -79,7 +81,7 @@ export const startUploadingFiles = (files = []) => {
 
     const photosUrls = await Promise.all(fileUploadPromises);
 
-    console.log("url", photosUrls);
+    // console.log("url", photosUrls);
 
     dispatch(setPhotosToActiveNote(photosUrls));
   };
@@ -92,7 +94,7 @@ export const startDeleteNote = () => {
     const { uid } = getState().auth;
     const { activeNote: note } = getState().journal;
 
-    console.log(`Start deleting note ${note.id} / uid: ${uid}`);
+    // console.log(`Start deleting note ${note.id} / uid: ${uid}`);
 
     const fileDeletePromises = [];
 
@@ -106,7 +108,7 @@ export const startDeleteNote = () => {
 
     await deleteDoc(docRef);
 
-    console.log("nota eliminada en Firebase");
+    // console.log("nota eliminada en Firebase");
 
     dispatch(deleteNote(note.id));
   };
