@@ -41,6 +41,7 @@ export const deleteImage = async (imageUrl) => {
   const timestamp = new Date().getTime();
 
   const { VITE_CLD_APIKEY, VITE_CLD_SECRET } = getEnvironments();
+  console.log(VITE_CLD_APIKEY, VITE_CLD_SECRET);
 
   const apiKey = VITE_CLD_APIKEY;
   const apiSecret = VITE_CLD_SECRET;
