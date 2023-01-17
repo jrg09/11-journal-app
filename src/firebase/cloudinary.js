@@ -35,13 +35,14 @@ export const deleteImage = async (imageUrl) => {
 
   //obtener el publicId de la imagen
   const segmentos = imageUrl.split("/");
-  const publicId = `${segmentos[segmentos.length - 2]}/${
-    segmentos[segmentos.length - 1].split(".")[0]
-  }`;
+  const publicId = `${segmentos[segmentos.length - 2]}/${segmentos[segmentos.length - 1].split(".")[0]}`;
 
   const timestamp = new Date().getTime();
-  const apiKey = "143594124424329";
-  const apiSecret = "ITHyjmL76oXuLLyoENn7ecnIdPs";
+
+  const { VITE_CLD_APIKEY, VITE_CLD_SECRET } = getEnvironments();
+
+  const apiKey = VITE_CLD_APIKEY;
+  const apiSecret = VITE_CLD_SECRET;
 
   const stringBase = `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
   const signature = await sha1(stringBase);

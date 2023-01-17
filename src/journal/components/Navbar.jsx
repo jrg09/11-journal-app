@@ -8,7 +8,7 @@ export const Navbar = ({ drawerWith = 240 }) => {
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    console.log("onLogout");
+    // console.log("onLogout");
     dispatch(clearNotesLogout());
     dispatch(startLogout());
   };
@@ -28,18 +28,11 @@ export const Navbar = ({ drawerWith = 240 }) => {
         },
       }}>
       <Toolbar>
-        <IconButton
-          color="inherit"
-          edge="start"
-          sx={{ display: { sm: "none" } }}>
+        <IconButton color="inherit" edge="start" sx={{ display: { sm: "none" } }}>
           <MenuOutlined />
         </IconButton>
 
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center">
+        <Grid container direction="row" justifyContent="space-between" alignItems="center">
           <Typography variant="h6" noWrap component="div">
             Journal App
           </Typography>

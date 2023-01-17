@@ -42,10 +42,7 @@ export const RegisterPage = () => {
     = useForm(formData, myFormValidations);
 
   const { status, errorMessage } = useSelector((state) => state.auth);
-  const isCheckingAuthentication = useMemo(
-    () => status === "checking",
-    [status]
-  );
+  const isCheckingAuthentication = useMemo(() => status === "checking", [status]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -53,16 +50,14 @@ export const RegisterPage = () => {
 
     if (!isFormValid) return;
 
-    console.log(formState);
+    // console.log(formState);
 
     dispatch(startRegisterUserWithEmailAndPassword({ name, email, password }));
   };
 
   return (
     <AuthLayout title="Crear cuenta">
-      <form
-        onSubmit={onSubmit}
-        className="animate__animated animate__fadeIn animate__faster">
+      <form onSubmit={onSubmit} className="animate__animated animate__fadeIn animate__faster">
         <h5>FormValid: {isFormValid ? "Válido" : "Incorrecto"}</h5>
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
@@ -110,21 +105,11 @@ export const RegisterPage = () => {
           <Grid item xs={12} sx={{ mt: 2 }}>
             <FormGroup>
               <FormControlLabel
-                control={
-                  <Checkbox
-                    name="terms"
-                    checked={terms}
-                    onChange={onInputChange}
-                  />
-                }
+                control={<Checkbox name="terms" checked={terms} onChange={onInputChange} />}
                 label={
                   <Typography>
                     Leí y acepto los
-                    <Link
-                      component={RouterLink}
-                      color="inherit"
-                      to="/auth/register"
-                      ml={1}>
+                    <Link component={RouterLink} color="inherit" to="/auth/register" ml={1}>
                       términos y condiciones
                     </Link>
                     .
@@ -144,11 +129,7 @@ export const RegisterPage = () => {
             </Grid>
 
             <Grid item xs={12}>
-              <Button
-                variant="contained"
-                fullWidth
-                type="submit"
-                disabled={isCheckingAuthentication}>
+              <Button variant="contained" fullWidth type="submit" disabled={isCheckingAuthentication}>
                 Crear Cuenta
               </Button>
             </Grid>
@@ -156,11 +137,7 @@ export const RegisterPage = () => {
 
           <Grid container direction="row" justifyContent="end">
             <Typography>¿Ya tienes cuenta?</Typography>
-            <Link
-              component={RouterLink}
-              color="inherit"
-              to="/auth/login"
-              ml={1}>
+            <Link component={RouterLink} color="inherit" to="/auth/login" ml={1}>
               Ingresar
             </Link>
           </Grid>

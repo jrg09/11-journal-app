@@ -10,7 +10,7 @@ export const useCheckAuth = () => {
 
   useEffect(() => {
     onAuthStateChanged(FirebaseAuth, async (user) => {
-      console.log("onAuthStateChanged", user);
+      //console.log("onAuthStateChanged", user);
       if (!user) return dispatch(logout());
 
       //hay un usuario autenticado
