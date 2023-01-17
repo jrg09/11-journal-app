@@ -41,18 +41,14 @@ export const deleteImage = async (imageUrl) => {
   const timestamp = new Date().getTime();
 
   const { VITE_CLD_APIKEY, VITE_CLD_SECRET } = getEnvironments();
-  console.log(VITE_CLD_APIKEY, VITE_CLD_SECRET);
 
-  const apiKey = VITE_CLD_APIKEY;
-  const apiSecret = VITE_CLD_SECRET;
-
-  const stringBase = `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
+  const stringBase = `public_id=${publicId}&timestamp=${timestamp}${VITE_CLD_SECRET}`;
   const signature = await sha1(stringBase);
 
   const formData = new FormData();
   formData.append("public_id", publicId);
   formData.append("upload_preset", "react-journal");
-  formData.append("api_key", apiKey);
+  formData.append("api_key", VITE_CLD_APIKEY);
   formData.append("timestamp", timestamp);
   formData.append("signature", signature);
 
