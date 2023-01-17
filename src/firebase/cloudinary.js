@@ -1,4 +1,5 @@
 import { sha1 } from "crypto-hash";
+import { getEnvironments } from "./getEnvironments";
 
 export const uploadFile = async (file) => {
   if (!file) throw new Error("El archivo no existe");
