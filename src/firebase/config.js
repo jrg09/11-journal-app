@@ -7,7 +7,10 @@ import { getEnvironments } from "./getEnvironments";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const env = getEnvironments();
+console.log(getEnvironments());
+
+const { VITE_APIKEY, VITE_AUTHDOMAIN, VITE_PROJECTID, VITE_STORAGEBUCKET, VITE_MESSAGINGSENDERID, VITE_APPID } =
+  getEnvironments();
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -30,12 +33,12 @@ const env = getEnvironments();
 //   appId: "1:169169455038:web:ccaf24194a036ebeac1bef",
 // };
 const firebaseConfig = {
-  apiKey: env.VITE_APIKEY,
-  authDomain: env.VITE_AUTHDOMAIN,
-  projectId: env.VITE_PROJECTID,
-  storageBucket: env.VITE_STORAGEBUCKET,
-  messagingSenderId: env.VITE_MESSAGINGSENDERID,
-  appId: env.VITE_AAPID,
+  apiKey: VITE_APIKEY,
+  authDomain: VITE_AUTHDOMAIN,
+  projectId: VITE_PROJECTID,
+  storageBucket: VITE_STORAGEBUCKET,
+  messagingSenderId: VITE_MESSAGINGSENDERID,
+  appId: VITE_APPID,
 };
 
 // Initialize Firebase
