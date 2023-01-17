@@ -7,6 +7,8 @@ import { CheckingAuth } from "../ui/components/CheckingAuth";
 export const AppRouter = () => {
   const status = useCheckAuth();
 
+  console.log(status);
+
   if (status === "checking") return <CheckingAuth />;
 
   return (
@@ -17,7 +19,8 @@ export const AppRouter = () => {
         <Route path="/auth/*" element={<AuthRoutes />} />
       )}
 
-      <Route path="/*" element={<Navigate to="/auth/login" />} />
+      {/* <Route path="/*" element={<Navigate to="/auth/login" />} /> */}
+      <Route path="/*" element={<p>404 página no encontrada</p>} />
       {/* login y registro */}
       {/* <Route path="/auth/*" element={<AuthRoutes />} /> */}
 
